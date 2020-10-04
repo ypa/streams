@@ -1,12 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 
 import App from './components/App';
 import reducers from './reducers';
 
-const store = createStore(reducers);
+// Setting up redux store with middleware and enhancers
+// for redux-devtools-extension chrome extensions as a debugging tool
+// https://github.com/zalmoxisus/redux-devtools-extension#12-advanced-store-setup
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(
+  reducers,
+  composeEnhancers(applyMiddleware())
+);
 
 ReactDOM.render(
   <Provider store={store}>
