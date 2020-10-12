@@ -38,7 +38,10 @@ const mapStateToProps = (state) => {
   // when rendering inside the component.
   // We had put state as object with ids as keys so that
   // it's easier for reducers to create new state object.
-  return { streams: Object.values(state.streams) };
+  return {
+    streams: Object.values(state.streams),
+    currentUserId: state.auth.userId
+  };
 }
 
 export default connect(mapStateToProps, { fetchStreams })(StreamList);
